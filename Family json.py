@@ -1,0 +1,63 @@
+import json
+
+family_string = '''
+{
+  "38DanbyRoad": [
+    {
+      "FirstName": "Derek",
+      "LastName": "Colley",
+      "Age": 41,
+      "Height": {
+        "Feet": 5,
+        "Inches": 6
+      },
+      "HairColour": "Brown"
+    },
+    {
+      "FirstName": "Lisa",
+      "LastName": "Colley",
+      "Age": 44,
+      "Height": {
+        "Feet": 5,
+        "Inches": 4
+      },
+      "HairColour": "Brown"
+    },
+    {
+      "FirstName": "Ewan",
+      "LastName": "Colley",
+      "Age": 15,
+      "Height": {
+        "Feet": 5,
+        "Inches": 7
+      },
+      "HairColour": "Brown"
+    },
+    {
+      "FirstName": "Alyssa",
+      "LastName": "Colley",
+      "Age": 16,
+      "Height": {
+        "Feet": 5,
+        "Inches": 5
+      },
+      "HairColour": "Blonde"
+    },
+    {
+      "FirstName": "Dexter",
+      "LastName": "Colley",
+      "Age": 8,
+      "Height": {
+        "Feet": 4,
+        "Inches": 0
+      },
+      "HairColour": "Brown"
+    }
+  ]
+}
+'''
+
+fileDataJSON = json.loads(family_string)
+
+for person in fileDataJSON["38DanbyRoad"]:
+    print(person['FirstName'])
