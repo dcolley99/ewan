@@ -9,6 +9,7 @@ UqId = 0
 i = 0
 HeightUqId = 0
 heightList = []
+
 HeightUqId = 0
 newHeightTable = []
 foot = 4

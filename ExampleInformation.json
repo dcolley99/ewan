@@ -1,0 +1,25 @@
+{
+    "PeopleInfo": [
+        {
+        "name": "Ewan",
+        "age": 25,
+        "town": "Hyde",
+        "height_cm": 172,
+        "job": "Student"
+        },
+        {
+        "name": "Alyssa",
+        "age": 25,
+        "town": "Hyde",
+        "height_cm": 168,
+        "job": "Unemployed"
+        },
+        {
+        "name": "Delboy",
+        "age": 25,
+        "town": "Hyde",
+        "height_cm": 169,
+        "job": "Managing Director"
+        }
+    ]
+}
