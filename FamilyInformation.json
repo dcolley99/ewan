@@ -46,7 +46,7 @@
       "Age": 8,
       "Height": {
         "Feet": 4,
-        "Inches": 0
+        "Inches": 1
       },
       "HairColour": "Brown"
     }
@@ -68,7 +68,7 @@
       "Age": 7,
       "Height": {
         "Feet": 4,
-        "Inches": 1
+        "Inches": 0
       },
       "HairColour": "Blonde"
     },

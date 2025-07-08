@@ -2,18 +2,36 @@ import json
 
 with open('FamilyInformation.json', 'r') as file:
     fileDataJSON = json.load(file)
-keyList = ["'FirstName'","'LastName'","'Age'","'Height'","'HairColour'"]
-filterTable = fileDataJSON["38DanbyRoad"]
 
-for i in filterTable:
-    valuesList = []
-    items = i.values()
-    for j in items: 
-        newList = valuesList.append(j)
-        print(j)
-    print(str(newList).strip("None"))
+danbyRoad = fileDataJSON["38DanbyRoad"]
+cheritonClose = fileDataJSON["11CheritonClose"]
+UqId = 0
+i = 0
 
-#for person in fileDataJSON["38DanbyRoad"]:
-#    print(person)
-#for person in fileDataJSON["11CheritonClose"]:
-#    print(person)
+for person in danbyRoad:
+    peopleList = []
+    UqId +=1
+    if i == 0:
+         peopleList.append(str(UqId))
+    for key, value in person.items():
+        if isinstance(value, dict) and key == "Height":
+            feet = value.get("Feet", 0)
+            inches = value.get("Inches", 0)
+            peopleList.append(f"{feet}")
+            peopleList.append(f"{inches}")
+        else:
+            peopleList.append(str(value))
+    print(", ".join(peopleList))
+
+for member in cheritonClose:
+    newList = []
+    UqId +=1
+    if i == 0:
+         newList.append(str(UqId))
+    for key, value in member.items():
+        if isinstance(value, dict) and key == "Height":
+            newList.append(str(value.get("Feet", 0)))
+            newList.append(str(value.get("Inches", 0)))
+        else:
+            newList.append(str(value))
+    print(", ".join(newList))
