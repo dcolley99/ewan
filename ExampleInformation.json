@@ -4,21 +4,30 @@
         "name": "Ewan",
         "age": 25,
         "town": "Hyde",
-        "height_cm": 172,
+        "height": {
+            "cm": 172,
+            "inches": 68
+        },
         "job": "Student"
         },
         {
         "name": "Alyssa",
         "age": 25,
         "town": "Hyde",
-        "height_cm": 168,
+        "height": {
+            "cm": 167,
+            "inches": 65
+        },
         "job": "Unemployed"
         },
         {
         "name": "Delboy",
         "age": 25,
         "town": "Hyde",
-        "height_cm": 169,
+        "height": {
+            "cm": 169,
+            "inches": 67
+        },
         "job": "Managing Director"
         }
     ]
