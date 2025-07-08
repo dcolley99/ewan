@@ -3,7 +3,10 @@
         {
         "name": "Ewan",
         "age": 25,
-        "town": "Hyde",
+        "location": {
+            "country": "United Kingdom",
+            "town": "Hyde"
+        },
         "height": {
             "cm": 172,
             "inches": 68
@@ -13,7 +16,10 @@
         {
         "name": "Alyssa",
         "age": 25,
-        "town": "Hyde",
+        "location": {
+            "country": "United Kingdom",
+            "town": "Hyde"
+        },
         "height": {
             "cm": 167,
             "inches": 65
@@ -23,7 +29,10 @@
         {
         "name": "Delboy",
         "age": 25,
-        "town": "Hyde",
+        "location": {
+            "country": "United Kingdom",
+            "town": "Hyde"
+        },
         "height": {
             "cm": 169,
             "inches": 67

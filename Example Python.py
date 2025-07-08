@@ -7,6 +7,7 @@ UqId = 0
 heightUqId = 0
 personInfo = fileDataJSON["PeopleInfo"]
 
+print("Information (Height (Cm/Inch)): ")
 for person in personInfo:
     heightList = []
     heightUqId+=1
@@ -21,6 +22,7 @@ for person in personInfo:
     print(" ".join(heightList))
 print("")
 
+print("Information (People): ")
 for person in personInfo:
     peopleList = []
     UqId+=1
@@ -34,3 +36,4 @@ for person in personInfo:
         else:
             peopleList.append(str(value))
     print(", ".join(peopleList))
+file.close()
