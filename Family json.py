@@ -79,4 +79,4 @@ for member in cheritonClose:
     print(", ".join(newList))
 print("")
 
-    
+file.close()
