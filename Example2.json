@@ -1,0 +1,122 @@
+{
+  "PeopleInfo": [
+    {
+      "name": "Ewan",
+      "age": 15,
+      "location": {
+        "global": {
+          "country": "United Kingdom",
+          "continent": "Europe",
+          "town": "Hyde",
+          "coordinates": {
+            "lat": 53.452,
+            "long": -2.080,
+            "map": {
+              "grid": {
+                "northing": 395000,
+                "easting": 392000
+              }
+            }
+          }
+        }
+      },
+      "height": {
+        "metric": {
+          "cm": 172,
+          "m": 1.72
+        },
+        "imperial": {
+          "inches": 68,
+          "feet": 5.7
+        }
+      },
+      "job": {
+        "title": "Student",
+        "details": {
+          "school": {
+            "name": "Hyde High School",
+            "address": {
+              "street": "School Road",
+              "postcode": "SK14 2AA",
+              "district": {
+                "name": "Tameside",
+                "region": "Greater Manchester"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Alyssa",
+      "age": 16,
+      "location": {
+        "global": {
+          "country": "United Kingdom",
+          "continent": "Europe",
+          "town": "Hyde"
+        }
+      },
+      "height": {
+        "metric": {
+          "cm": 167,
+          "m": 1.67
+        },
+        "imperial": {
+          "inches": 65,
+          "feet": 5.4
+        }
+      },
+      "job": {
+        "title": "Unemployed",
+        "details": {
+          "seeking": true,
+          "interests": ["Design", "Animation", "Retail"]
+        }
+      }
+    },
+    {
+      "name": "Delboy",
+      "age": 41,
+      "location": {
+        "global": {
+          "country": "United Kingdom",
+          "continent": "Europe",
+          "town": "Hyde",
+          "coordinates": {
+            "lat": 53.450,
+            "long": -2.085
+          }
+        }
+      },
+      "height": {
+        "metric": {
+          "cm": 169,
+          "m": 1.69
+        },
+        "imperial": {
+          "inches": 67,
+          "feet": 5.5
+        }
+      },
+      "job": {
+        "title": "Managing Director",
+        "details": {
+          "company": {
+            "name": "Global Technologists Ltd.",
+            "location": {
+              "city": "Manchester",
+              "building": {
+                "name": "Tech Park",
+                "floor": 3,
+                "suite": "3B"
+              }
+            }
+          },
+          "tenure_years": 10,
+          "departments": ["Data", "Strategy", "Operations"]
+        }
+      }
+    }
+  ]
+}
