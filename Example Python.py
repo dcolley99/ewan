@@ -46,7 +46,15 @@ def flatten(obj, top_level_uqid, level):
             "Value": str(obj)
         })
 
-for top_key, people in fileDataJSON.items():
+def iterate_top(obj):
+    if isinstance(obj, dict):
+        return obj.items()
+    elif isinstance(obj, list):
+        return enumerate(obj)
+    else:
+        return []
+
+for top_key, people in iterate_top(fileDataJSON):
     top_uqid = assign_uqid()
     structured_output.append({
         "UqID": top_uqid,
@@ -55,10 +63,15 @@ for top_key, people in fileDataJSON.items():
         "Level": 1,
         "Value": top_key
     })
-    for person in people:
-        flatten(person, top_uqid, level=2)
+    if isinstance(people, (list, dict)):
+        if isinstance(people, list):
+            for person in people:
+                flatten(person, top_uqid, level=2)
+        else:
+            flatten(people, top_uqid, level=2)
+    else:
+        flatten(people, top_uqid, level=2)
 
 print(f"{'UqID':<6} {'PUqID':<6} {'Level':<5} {'Type':<6} Value")
 for entry in structured_output:
     print(f"{entry['UqID']:<6} {entry['PUqID']:<6} {entry['Level']:<5} {entry['Type']:<6} {entry['Value']}")
-file.close()
