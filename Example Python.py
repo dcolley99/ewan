@@ -7,7 +7,7 @@ UqId = 0
 heightUqId = 0
 personInfo = fileDataJSON["PeopleInfo"]
 
-print("Information (Height (Cm/Inch)): ")
+print("Information (Dictionaries): ")
 for person in personInfo:
     heightList = []
     heightUqId+=1
