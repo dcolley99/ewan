@@ -1,43 +1,39 @@
 import json
 
-with open('ExampleInformation.json','r') as file:
+# Load JSON file
+with open('ExampleInformation.json', 'r') as file:
     fileDataJSON = json.load(file)
 
-UqId = 0
-heightUqId = 0
-personInfo = fileDataJSON["PeopleInfo"]
-sub_sub_key = ""
+smallFamily = fileDataJSON["PeopleInfo"]
 
-print("Information (Dictionaries): ")
-for person in personInfo:
-    dictList = []
-    heightUqId+=1
-    dictList.append(str(heightUqId))
+print("Information (Level 1 (Name/Age/Occupation))")
+for person in smallFamily:
+    peopleList = []
     for key, value in person.items():
-        if isinstance(value, dict):
-            for sub_key, sub_value in value.items():
-                if isinstance(sub_value, dict):
-                    for subKey, subValue in sub_value.items():
-                        dictList.append(str(subValue))
-                else:
-                    dictList.append(str(sub_value))
-    print(", ".join(dictList))
+        if not isinstance(value, dict):
+            peopleList.append(f"{value}")
+    print(", ".join(peopleList))
 print("")
 
-print("Information (People): ")
-for person in personInfo:
-    peopleList = []
-    UqId+=1
-    peopleList.append(str(UqId))
+print("Information (Level 2 (Town, cm/inches)): ")
+for person in smallFamily:
     for key, value in person.items():
         if isinstance(value, dict):
+            infoList = []
             for sub_key, sub_value in value.items():
+                if not isinstance(sub_value, dict):
+                    infoList.append(f"{sub_value}")
+            print(", ".join(infoList))
+print("")
+
+print("Information (Level 3 (Country/Continent)): ")
+for person in smallFamily:
+    for key, value in person.items():
+        if isinstance(value, dict):
+            for subkey, sub_value in value.items():
                 if isinstance(sub_value, dict):
+                    locationList = []
                     for subKey, subValue in sub_value.items():
-                        dictList.append(str(subValue))
-                else:
-                    dictList.append(str(sub_value))
-        else:
-            peopleList.append(str(value))
-    print(", ".join(peopleList))
+                        locationList.append(f"{subValue}")
+                    print(", ".join(locationList))
 file.close()
