@@ -10,15 +10,18 @@ sub_sub_key = ""
 
 print("Information (Dictionaries): ")
 for person in personInfo:
-    heightList = []
+    dictList = []
     heightUqId+=1
+    dictList.append(str(heightUqId))
     for key, value in person.items():
         if isinstance(value, dict):
-            heightList.append(str(heightUqId))
-            heightList.append(":")
             for sub_key, sub_value in value.items():
-                heightList.append(str(sub_value))
-    print(" ".join(heightList))
+                if isinstance(sub_value, dict):
+                    for subKey, subValue in sub_value.items():
+                        dictList.append(str(subValue))
+                else:
+                    dictList.append(str(sub_value))
+    print(", ".join(dictList))
 print("")
 
 print("Information (People): ")
@@ -29,7 +32,11 @@ for person in personInfo:
     for key, value in person.items():
         if isinstance(value, dict):
             for sub_key, sub_value in value.items():
-                peopleList.append(str(sub_value))
+                if isinstance(sub_value, dict):
+                    for subKey, subValue in sub_value.items():
+                        dictList.append(str(subValue))
+                else:
+                    dictList.append(str(sub_value))
         else:
             peopleList.append(str(value))
     print(", ".join(peopleList))

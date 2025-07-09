@@ -4,7 +4,10 @@
         "name": "Ewan",
         "age": 15,
         "location": {
-            "country": "United Kingdom",
+            "global": {
+                "country": "United Kingdom",
+                "continent": "Europe"
+            },
             "town": "Hyde"
         },
         "height": {
@@ -17,7 +20,10 @@
         "name": "Alyssa",
         "age": 16,
         "location": {
-            "country": "United Kingdom",
+            "global": {
+                "country": "United Kingdom",
+                "continent": "Europe"
+            },
             "town": "Hyde"
         },
         "height": {
@@ -30,7 +36,10 @@
         "name": "Delboy",
         "age": 41,
         "location": {
-            "country": "United Kingdom",
+            "global": {
+                "country": "United Kingdom",
+                "continent": "Europe"
+            },
             "town": "Hyde"
         },
         "height": {
