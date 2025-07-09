@@ -6,9 +6,9 @@
         "location": {
             "global": {
                 "country": "United Kingdom",
-                "continent": "Europe"
-            },
-            "town": "Hyde"
+                "continent": "Europe",
+                "town": "Hyde"
+            }
         },
         "height": {
             "cm": 172,
@@ -22,9 +22,9 @@
         "location": {
             "global": {
                 "country": "United Kingdom",
-                "continent": "Europe"
-            },
-            "town": "Hyde"
+                "continent": "Europe",
+                "town": "Hyde"
+            }
         },
         "height": {
             "cm": 167,
@@ -38,9 +38,9 @@
         "location": {
             "global": {
                 "country": "United Kingdom",
-                "continent": "Europe"
-            },
-            "town": "Hyde"
+                "continent": "Europe",
+                "town": "Hyde"
+            }
         },
         "height": {
             "cm": 169,

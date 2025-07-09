@@ -1,10 +1,13 @@
 import json
 
-# Load JSON file
 with open('ExampleInformation.json', 'r') as file:
     fileDataJSON = json.load(file)
 
 smallFamily = fileDataJSON["PeopleInfo"]
+
+peopleList = []
+infoList = []
+locationList = []
 
 print("Information (Level 1 (Name/Age/Occupation))")
 for person in smallFamily:
@@ -15,7 +18,7 @@ for person in smallFamily:
     print(", ".join(peopleList))
 print("")
 
-print("Information (Level 2 (Town, cm/inches)): ")
+print("Information (Level 2 (cm/inches)): ")
 for person in smallFamily:
     for key, value in person.items():
         if isinstance(value, dict):
@@ -23,7 +26,8 @@ for person in smallFamily:
             for sub_key, sub_value in value.items():
                 if not isinstance(sub_value, dict):
                     infoList.append(f"{sub_value}")
-            print(", ".join(infoList))
+            if infoList:
+                print(", ".join(infoList))
 print("")
 
 print("Information (Level 3 (Country/Continent)): ")
