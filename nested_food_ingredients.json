@@ -1,0 +1,69 @@
+{
+  "dish": "Lasagna",
+  "servings": 6,
+  "total_calories": 2400,
+  "cuisine": "Italian",
+  "ingredients": [
+    {
+      "origin": "France",
+      "ph_level": 5.6,
+      "unit": "GeV",
+      "type": "Sauce",
+      "mass_amu": 4.604,
+      "relevance": "Moderate",
+      "charge": "0"
+    },
+    {
+      "color": "Green",
+      "mass_amu": 5.545,
+      "allergens": [
+        "Egg",
+        "None"
+      ],
+      "ingredients": [
+        {
+          "color": "Beige",
+          "calories": 390,
+          "fat_content": "4.7%",
+          "ingredients": [
+            {
+              "ph_level": 7.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mass_amu": 6.354,
+      "color": "White",
+      "origin": "France",
+      "ph_level": 6.4,
+      "atomic_number": 46,
+      "type": "Quark",
+      "unit": "Joules",
+      "charge": "+2/3"
+    },
+    {
+      "fat_content": "3.2%",
+      "ingredients": [
+        {
+          "origin": "Italy",
+          "charge": "+2/3",
+          "unit": "g",
+          "description": "Base ingredient",
+          "color": "Clear",
+          "atomic_number": 56,
+          "relevance": "Moderate",
+          "spin": "1",
+          "fat_content": "9.4%",
+          "ingredients": [
+            {
+              "atomic_number": 40,
+              "charge": "0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
