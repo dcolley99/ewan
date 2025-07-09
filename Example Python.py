@@ -1,43 +1,42 @@
 import json
 
-with open('ExampleInformation.json', 'r') as file:
+filename = str(input("Enter file name... "))
+with open(filename, 'r') as file:
     fileDataJSON = json.load(file)
 
-smallFamily = fileDataJSON["PeopleInfo"]
+level_list = []
+max_level = 1
 
-peopleList = []
-infoList = []
-locationList = []
+def collect_by_level(obj, level=1, results=None):
+    if results == None:
+        results = {}
 
-print("Information (Level 1 (Name/Age/Occupation))")
-for person in smallFamily:
-    peopleList = []
-    for key, value in person.items():
-        if not isinstance(value, dict):
-            peopleList.append(f"{value}")
-    print(", ".join(peopleList))
-print("")
+    if isinstance(obj, dict):
+        for v in obj.values():
+            collect_by_level(v, level + 1, results)
+    elif isinstance(obj, list):
+        for item in obj:
+            collect_by_level(item, level, results)
+    else:
+        if level not in results:
+            results[level] = []
+        results[level].append(str(obj))
+    
+    return results
 
-print("Information (Level 2 (cm/inches)): ")
-for person in smallFamily:
-    for key, value in person.items():
-        if isinstance(value, dict):
-            infoList = []
-            for sub_key, sub_value in value.items():
-                if not isinstance(sub_value, dict):
-                    infoList.append(f"{sub_value}")
-            if infoList:
-                print(", ".join(infoList))
-print("")
 
-print("Information (Level 3 (Country/Continent)): ")
-for person in smallFamily:
-    for key, value in person.items():
-        if isinstance(value, dict):
-            for subkey, sub_value in value.items():
-                if isinstance(sub_value, dict):
-                    locationList = []
-                    for subKey, subValue in sub_value.items():
-                        locationList.append(f"{subValue}")
-                    print(", ".join(locationList))
+for key, value in fileDataJSON.items():
+    jsonScript = value
+
+for person in jsonScript:
+    values_by_level = collect_by_level(person, level=1)
+    level_list.append(values_by_level)
+    max_level = max(max_level, max(values_by_level.keys()))
+
+for level in range(2, max_level+1):
+    print(f"Information (Level {level-1}):")
+    for levels in level_list:
+        if level in levels:
+            print(", ".join(levels[level]))
+    print("")
 file.close()
