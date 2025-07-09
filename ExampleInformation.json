@@ -2,7 +2,7 @@
     "PeopleInfo": [
         {
         "name": "Ewan",
-        "age": 25,
+        "age": 15,
         "location": {
             "country": "United Kingdom",
             "town": "Hyde"
@@ -15,7 +15,7 @@
         },
         {
         "name": "Alyssa",
-        "age": 25,
+        "age": 16,
         "location": {
             "country": "United Kingdom",
             "town": "Hyde"
@@ -28,7 +28,7 @@
         },
         {
         "name": "Delboy",
-        "age": 25,
+        "age": 41,
         "location": {
             "country": "United Kingdom",
             "town": "Hyde"

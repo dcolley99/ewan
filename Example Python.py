@@ -12,13 +12,11 @@ for person in personInfo:
     heightList = []
     heightUqId+=1
     for key, value in person.items():
-        if isinstance(value, dict) and key == "height":
-            cmNew = str(value.get("cm"))
-            inchesNew = str(value.get("inches"))
+        if isinstance(value, dict):
             heightList.append(str(heightUqId))
             heightList.append(":")
-            heightList.append(cmNew)
-            heightList.append(inchesNew)
+            for sub_key, sub_value in value.items():
+                heightList.append(str(sub_value))
     print(" ".join(heightList))
 print("")
 
@@ -28,11 +26,9 @@ for person in personInfo:
     UqId+=1
     peopleList.append(str(UqId))
     for key, value in person.items():
-        if isinstance(value, dict) and key == "height":
-            cmNew = str(value.get("cm"))
-            inchesNew = str(value.get("inches"))
-            peopleList.append(cmNew)
-            peopleList.append(inchesNew)
+        if isinstance(value, dict):
+            for sub_key, sub_value in value.items():
+                peopleList.append(str(sub_value))
         else:
             peopleList.append(str(value))
     print(", ".join(peopleList))
