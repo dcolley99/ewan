@@ -6,6 +6,7 @@ with open('ExampleInformation.json','r') as file:
 UqId = 0
 heightUqId = 0
 personInfo = fileDataJSON["PeopleInfo"]
+sub_sub_key = ""
 
 print("Information (Dictionaries): ")
 for person in personInfo:
