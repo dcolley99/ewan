@@ -29,9 +29,9 @@ for key, value in fileDataJSON.items():
     jsonScript = value
 
 for person in jsonScript:
-    values_by_level = collect_by_level(person, level=1)
-    level_list.append(values_by_level)
-    max_level = max(max_level, max(values_by_level.keys()))
+    valuesLevel = collect_by_level(person, level=1)
+    level_list.append(valuesLevel)
+    max_level = max(max_level, max(valuesLevel.keys()))
 
 for level in range(2, max_level+1):
     print(f"Information (Level {level-1}):")
