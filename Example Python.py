@@ -7,6 +7,9 @@ with open(filename, 'r') as file:
 level_list = []
 max_level = 1
 
+for key, value in fileDataJSON.items():
+    jsonScript = value
+
 def collect_by_level(obj, level=1, results=None):
     if results == None:
         results = {}
@@ -24,14 +27,10 @@ def collect_by_level(obj, level=1, results=None):
     
     return results
 
-
-for key, value in fileDataJSON.items():
-    jsonScript = value
-
 for person in jsonScript:
-    valuesLevel = collect_by_level(person, level=1)
-    level_list.append(valuesLevel)
-    max_level = max(max_level, max(valuesLevel.keys()))
+    values_by_level = collect_by_level(person, level=1)
+    level_list.append(values_by_level)
+    max_level = max(max_level, max(values_by_level.keys()))
 
 for level in range(2, max_level+1):
     print(f"Information (Level {level-1}):")

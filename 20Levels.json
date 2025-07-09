@@ -1,0 +1,62 @@
+{
+  "level1": {
+    "name": "Root",
+    "description": "Top level node",
+    "children": {
+      "level2a": {
+        "value": 123,
+        "status": true,
+        "tags": ["alpha", "beta", "gamma"],
+        "children": {
+          "level3a": {
+            "value": "Leaf A",
+            "details": {
+              "created": "2025-01-01",
+              "valid": false,
+              "metadata": {
+                "owner": "UserA",
+                "permissions": ["read", "write"]
+              }
+            }
+          },
+          "level3b": {
+            "value": "Leaf B",
+            "details": {
+              "created": "2025-02-01",
+              "valid": true,
+              "metadata": {
+                "owner": "UserB",
+                "permissions": ["read"]
+              }
+            }
+          }
+        }
+      },
+      "level2b": {
+        "value": 456,
+        "status": false,
+        "children": {
+          "level3c": {
+            "value": "Leaf C",
+            "settings": {
+              "enabled": true,
+              "threshold": 0.75,
+              "history": [
+                {"timestamp": "2025-03-01", "event": "update"},
+                {"timestamp": "2025-04-01", "event": "reset"}
+              ]
+            }
+          },
+          "level3d": {
+            "value": "Leaf D",
+            "settings": {
+              "enabled": false,
+              "threshold": 0.9,
+              "history": []
+            }
+          }
+        }
+      }
+    }
+  }
+}
