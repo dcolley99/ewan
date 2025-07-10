@@ -35,10 +35,6 @@ def extract_records(obj):
 
 rows = extract_records(data)
 
-if not rows:
-    print("No suitable list of records found in the JSON.")
-    exit(1)
-
 all_keys = set()
 for row in rows:
     for k, v in row.items():
