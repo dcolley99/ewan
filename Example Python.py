@@ -1,7 +1,7 @@
 import json
 
 filename = input("Enter file name... ")
-#
+
 with open(filename, 'r') as file:
     data = json.load(file)
 
@@ -70,7 +70,7 @@ def format_cell(val, width, numeric=False):
     val = truncate(val, width)
     return val.rjust(width) if numeric else val.ljust(width)
 
-header = format_cell("UqId", row_num_width)
+header = format_cell("RowID", row_num_width)
 for k in all_keys:
     header += "   " + format_cell(last_key_only(k), col_widths[k])
 print(header)
