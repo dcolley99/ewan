@@ -1,11 +1,9 @@
-#IMPORTANT
-#Make a detection system for matching the UQID to each line number in the text document. Use ChatGPT, Internet, etc.
-
 import json
+import collections
 
 filename = input("Enter file name... ")
 with open(filename, 'r') as file:
-    fileDataJSON = json.load(file)
+    fileDataJSON = json.load(file, object_pairs_hook=collections.OrderedDict)
 
 uqid_counter = 1
 structured_output = []
@@ -74,7 +72,9 @@ for top_key, people in iterate_top(fileDataJSON):
             flatten(people, top_uqid, level=2)
     else:
         flatten(people, top_uqid, level=2)
+def convertJSON(nameOfFile):
+    print(f"{'UqID':<6} {'PUqID':<6} {'Level':<5} {'Type':<6} Value")
+    for entry in structured_output:
+        print(f"{entry['UqID']:<6} {entry['PUqID']:<6} {entry['Level']:<5} {entry['Type']:<6} {entry['Value']}")
 
-print(f"{'UqID':<6} {'PUqID':<6} {'Level':<5} {'Type':<6} Value")
-for entry in structured_output:
-    print(f"{entry['UqID']:<6} {entry['PUqID']:<6} {entry['Level']:<5} {entry['Type']:<6} {entry['Value']}")
+convertJSON(filename)
