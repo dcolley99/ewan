@@ -70,7 +70,7 @@ def format_cell(val, width, numeric=False):
     val = truncate(val, width)
     return val.rjust(width) if numeric else val.ljust(width)
 
-header = format_cell("Row", row_num_width)
+header = format_cell("UqId", row_num_width)
 for k in all_keys:
     header += "   " + format_cell(last_key_only(k), col_widths[k])
 print(header)
