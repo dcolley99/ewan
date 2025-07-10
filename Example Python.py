@@ -1,80 +1,89 @@
 import json
-import collections
 
 filename = input("Enter file name... ")
+
 with open(filename, 'r') as file:
-    fileDataJSON = json.load(file, object_pairs_hook=collections.OrderedDict)
+    data = json.load(file)
 
-uqid_counter = 1
-structured_output = []
-
-def assign_uqid():
-    global uqid_counter
-    uqid = uqid_counter
-    uqid_counter += 1
-    return uqid
-
-def flatten(obj, top_level_uqid, level):
-    if isinstance(obj, dict):
-        for key, value in obj.items():
-            key_uqid = assign_uqid()
-            structured_output.append({
-                "UqID": key_uqid,
-                "PUqID": top_level_uqid,
-                "Type": "Key",
-                "Level": level,
-                "Value": key
-            })
-            flatten(value, top_level_uqid, level + 1)
-    elif isinstance(obj, list):
-        for i, item in enumerate(obj):
-            index_uqid = assign_uqid()
-            structured_output.append({
-                "UqID": index_uqid,
-                "PUqID": top_level_uqid,
-                "Type": "Key",
-                "Level": level,
-                "Value": f"[{i}]"
-            })
-            flatten(item, top_level_uqid, level + 1)
+def flatten_json(y, prefix=''):
+    out = {}
+    if isinstance(y, dict):
+        for k, v in y.items():
+            full_key = f"{prefix}.{k}" if prefix else k
+            out.update(flatten_json(v, full_key))
+    elif isinstance(y, list):
+        for i, v in enumerate(y):
+            full_key = f"{prefix}[{i}]" if prefix else f"[{i}]"
+            out.update(flatten_json(v, full_key))
     else:
-        value_uqid = assign_uqid()
-        structured_output.append({
-            "UqID": value_uqid,
-            "PUqID": top_level_uqid,
-            "Type": "Value",
-            "Level": level,
-            "Value": str(obj)
-        })
+        out[prefix] = str(y)
+    return out
 
-def iterate_top(obj):
-    if isinstance(obj, dict):
-        return obj.items()
-    elif isinstance(obj, list):
-        return enumerate(obj)
-    else:
-        return []
+def extract_records(obj):
+    records = []
+    if isinstance(obj, list):
+        for item in obj:
+            if isinstance(item, dict):
+                records.append(flatten_json(item))
+    elif isinstance(obj, dict):
+        for val in obj.values():
+            if isinstance(val, list):
+                for item in val:
+                    if isinstance(item, dict):
+                        records.append(flatten_json(item))
+    return records
 
-for top_key, people in iterate_top(fileDataJSON):
-    top_uqid = assign_uqid()
-    structured_output.append({
-        "UqID": top_uqid,
-        "PUqID": 0,
-        "Type": "Key",
-        "Level": 1,
-        "Value": top_key
-    })
-    if isinstance(people, (list, dict)):
-        if isinstance(people, list):
-            for person in people:
-                flatten(person, top_uqid, level=2)
-        else:
-            flatten(people, top_uqid, level=2)
-    else:
-        flatten(people, top_uqid, level=2)
-def convertJSON(nameOfFile):
-    print(f"{'UqID':<6} {'PUqID':<6} {'Level':<5} {'Type':<6} Value")
-    for entry in structured_output:
-        print(f"{entry['UqID']:<6} {entry['PUqID']:<6} {entry['Level']:<5} {entry['Type']:<6} {entry['Value']}")
+rows = extract_records(data)
 
-convertJSON(filename)
+if not rows:
+    print("No suitable list of records found in the JSON.")
+    exit(1)
+
+all_keys = set()
+for row in rows:
+    for k, v in row.items():
+        if v.strip() != '':
+            all_keys.add(k)
+
+all_keys = sorted(all_keys)
+
+def last_key_only(key):
+    return key.split('.')[-1].split('[')[0] if '.' in key or '[' in key else key
+
+def truncate(s, width):
+    return s if len(s) <= width else s[:width-3] + "..."
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except:
+        return False
+
+col_widths = {}
+for k in all_keys:
+    col_widths[k] = max(len(last_key_only(k)), max(len(row.get(k, '')) for row in rows))
+
+max_col_width = 20
+for k in col_widths:
+    col_widths[k] = min(col_widths[k], max_col_width)
+
+row_num_width = max(len(str(len(rows))), 3)
+
+def format_cell(val, width, numeric=False):
+    val = truncate(val, width)
+    return val.rjust(width) if numeric else val.ljust(width)
+
+header = format_cell("Row", row_num_width)
+for k in all_keys:
+    header += "   " + format_cell(last_key_only(k), col_widths[k])
+print(header)
+print(" " * row_num_width + " " + "-" * (len(header) - row_num_width - 1))
+
+for idx, row in enumerate(rows, 1):
+    line = format_cell(str(idx), row_num_width, numeric=True)
+    for k in all_keys:
+        v = row.get(k, '')
+        numeric = is_number(v)
+        line += "   " + format_cell(v, col_widths[k], numeric)
+    print(line)
