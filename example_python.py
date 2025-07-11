@@ -1,7 +1,4 @@
 import json
-import unittest
-                #--- USE UNITTEST AND THE -INTERNET- TO DO TESTING, NOT CHATGPT. ---#
-            #--- Research why no tests have been done if the LogicError occurs again. ---#
 
 def tableJSON():
     filename = input("Enter file name... ")
