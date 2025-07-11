@@ -6,17 +6,33 @@ def tableJSON():
     with open(filename, 'r') as file:
         data = json.load(file)
 
+    messages = {
+        "flatten_duplicates": [],
+        "value_duplicates": [],
+        "missing_keys": [],
+    }
+
     def flatten_json(y, prefix=''):
         out = {}
         if isinstance(y, dict):
             for k, v in y.items():
                 full_key = f"{prefix}.{k}" if prefix else k
-                out.update(flatten_json(v, full_key))
+                nested = flatten_json(v, full_key)
+                for nk, nv in nested.items():
+                    if nk in out:
+                        messages["flatten_duplicates"].append(f"Duplicate key during flattening: {nk}")
+                    out[nk] = nv
         elif isinstance(y, list):
             for i, v in enumerate(y):
                 full_key = f"{prefix}[{i}]" if prefix else f"[{i}]"
-                out.update(flatten_json(v, full_key))
+                nested = flatten_json(v, full_key)
+                for nk, nv in nested.items():
+                    if nk in out:
+                        messages["flatten_duplicates"].append(f"Duplicate key during flattening: {nk}")
+                    out[nk] = nv
         else:
+            if prefix in out:
+                messages["flatten_duplicates"].append(f"Duplicate key at leaf: {prefix}")
             out[prefix] = str(y)
         return out
 
@@ -48,7 +64,7 @@ def tableJSON():
         return key.split('.')[-1].split('[')[0] if '.' in key or '[' in key else key
 
     def truncate(s, width):
-        return s if len(s) <= width else s[:width-3] + "..."
+        return s if len(s) <= width else s[:width - 3] + "..."
 
     def is_number(s):
         try:
@@ -78,11 +94,43 @@ def tableJSON():
     print(" " * row_num_width + " " + "-" * (len(header) - row_num_width - 1))
 
     for idx, row in enumerate(rows, 1):
+        val_counts = {}
+        for k, v in row.items():
+            if v in val_counts:
+                messages["value_duplicates"].append(
+                    f"Row {idx}: Duplicate value '{v}' under keys '{val_counts[v]}' and '{k}'"
+                )
+            else:
+                val_counts[v] = k
+
+        missing = [k for k in all_keys if k not in row]
+        if missing:
+            messages["missing_keys"].append(f"Row {idx} is missing keys: {missing}")
+
         line = format_cell(str(idx), row_num_width, numeric=True)
         for k in all_keys:
             v = row.get(k, '')
             numeric = is_number(v)
             line += "   " + format_cell(v, col_widths[k], numeric)
         print(line)
+
+    print("\nValidation Summary:")
+    print(f"Total rows of data: {len(rows)}")
+    print(f"Total number of keys: {len(all_keys)}")
+
+    if messages["flatten_duplicates"]:
+        print("\n Flattening Duplicates:")
+        for msg in messages["flatten_duplicates"]:
+            print("  -", msg)
+
+    if messages["value_duplicates"]:
+        print("\n Value Duplicates Within Rows:")
+        for msg in messages["value_duplicates"]:
+            print("  -", msg)
+
+    if messages["missing_keys"]:
+        print("\n Missing Keys in Rows:")
+        for msg in messages["missing_keys"]:
+            print("  -", msg)
 
 tableJSON()
